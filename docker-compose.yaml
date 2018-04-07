@@ -1,0 +1,54 @@
+version: '3'
+services:
+    web:
+      # image: gruner/craftcms3:latest
+      build: .
+      ports:
+        - 80:80
+      volumes:
+        - ./tmp/log:/var/log
+      networks:
+        craftcms:
+          aliases:
+            - "web"
+      # override env vars in .env file
+      environment:
+        # Set locale to UTF-8 (https://oncletom.io/2015/docker-encoding/)
+        LANG: C.UTF-8
+
+        # MEMCACHED is linked
+        MEMCACHED_HOST: memcached
+
+        # DB is linked
+        DB_DRIVER: pgsql
+        DB_HOST: postgres
+        DB_NAME: craft3
+        DB_PORT: 5432
+        DB_USER: craft3
+        DB_PASS: secret
+
+    postgres:
+      image: postgres:9.6.5
+      environment:
+        POSTGRES_USER: craft3
+        POSTGRES_PASSWORD: secret
+        POSTGRES_DB: craft3
+        POSTGRES_INITDB_ARGS: "-E UTF8"
+      volumes:
+        # Persistent data
+        - ./tmp/postgresql/data:/var/lib/postgresql/data
+      networks:
+        craftcms:
+          aliases:
+            - "postgres"
+
+    memcached:
+      image: memcached:1.5.1
+      networks:
+        craftcms:
+          aliases:
+            - "memcached"
+
+networks:
+  craftcms:
+    driver: bridge

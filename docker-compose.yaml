@@ -16,10 +16,10 @@ services:
         # Set locale to UTF-8 (https://oncletom.io/2015/docker-encoding/)
         LANG: C.UTF-8
 
-        # MEMCACHED is linked
+        # `memcached` is a network alias
         MEMCACHED_HOST: memcached
 
-        # DB is linked
+        # `postgres` is a network alias
         DB_DRIVER: pgsql
         DB_HOST: postgres
         DB_NAME: craft3

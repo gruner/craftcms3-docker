@@ -1,16 +1,16 @@
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## Introduction
+# Craft 3 Docker
 
 This is a [Craft 3](https://craftcms.com) base running on Apache with PostgreSQL and Memcached. Much of it has been ported from [wyveo/craftcms-docker](https://github.com/wyveo/craftcms-docker) which runs on NGINX.
 
-### Versioning
+## Versioning
 
 | Docker Tag | Git Branch | Craft Release | Database | Caching |
 |-----|-------|-----|--------|--------|
-| latest | master | 3.0.1 | PostgreSQL 9.6.5 | Memcached 1.5.0 |
+| latest | master | 3.0.1 | PostgreSQL 10.0 | Memcached 1.5.0 |
 
-Features:
+## Features:
 
  - Apache, PHP 7.2.x, Git 2.11.0
  - imageMagick image manipulation library
@@ -24,4 +24,8 @@ $ cd craftcms3-docker
 $ docker-compose up
 ```
 
+## Craft installation
+
 navigate to `http://<HOSTNAME>/admin` to begin installing Craft.
+
+When asked for the DB Server, enter `postgres`. This is the the network alias defined in `docker-compose.yaml`.
